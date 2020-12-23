@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "139297712123",
+    "project_id": "sigasys-36154",
+    "storage_bucket": "sigasys-36154.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:139297712123:android:13489e0a260c8437850d5e",
+        "android_client_info": {
+          "package_name": "br.com.tradesystem.sigasys"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "139297712123-ce6271e0obt003us8ge4ihfpda7iesl6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUCqYt0AUTxPOmLAUBFe9xso7ERXGWuak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "139297712123-ce6271e0obt003us8ge4ihfpda7iesl6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
