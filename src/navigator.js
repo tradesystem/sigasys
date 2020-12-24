@@ -9,6 +9,7 @@ import Chamar from './screens/Chamar'
 import Cadastro from './screens/Cadastro'
 import Apoio from './screens/Apoio'
 import Chat from './screens/Chat'
+import ChatOnline from './screens/ChatOnline'
 
 import commonstyles from './commonstyles'
 
@@ -80,6 +81,16 @@ function Navigator(){
                 <Stack.Screen 
                     name="Chat" 
                     component={Chat} 
+                    options={{
+                       headerTintColor: '#ececec',
+                       headerBackTitle: '',
+                       headerStyle: {backgroundColor: commonstyles.colors.sigasysazul},
+                       ...TransitionPresets.ModalPresentationIOS
+                    }}
+                />
+                <Stack.Screen 
+                    name="ChatOnline" 
+                    component={ChatOnline} 
                     options={{
                        headerTintColor: '#ececec',
                        headerBackTitle: '',

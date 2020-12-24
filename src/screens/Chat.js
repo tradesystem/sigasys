@@ -8,7 +8,7 @@ function Chat() {
     setMessages([
       {
         _id: 1,
-        text: 'Hello developer',
+        text: 'Teste chat',
         createdAt: new Date(),
         user: {
           _id: 2,

@@ -100,6 +100,9 @@ class Inicio extends Component {
                     <TouchableOpacity style={styles.input}>
                         <Text style={{textAlign: 'center', color: 'white'}}>Simular Emergência</Text>
                     </TouchableOpacity>
+                    <TouchableOpacity style={styles.input} onPress={() => this.props.navigation.navigate("ChatOnline")}>
+                        <Text style={{textAlign: 'center', color: 'white'}}>Entrar no Chat</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.botaoEntrar} onPress={() => this.logout()}>
                         <Text style={{textAlign: 'center', color: 'white'}}>Sair</Text>
                     </TouchableOpacity>

@@ -181,10 +181,7 @@ class Auth extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.botaoEntrar} onPress={() => this.props.navigation.navigate('Localizacao')}>
                         <Text style={{textAlign: 'center', color: 'white'}}>Mapa</Text>    
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.botaoEntrar} onPress={() => this.props.navigation.navigate('Chat')}>
-                        <Text style={{textAlign: 'center', color: 'white'}}>Chat</Text>    
-                    </TouchableOpacity>                        
+                    </TouchableOpacity>                       
                     <Image source={logosiga} style={styles.logosiga} />
                 </SafeAreaView>
             </KeyboardAvoidingView>
