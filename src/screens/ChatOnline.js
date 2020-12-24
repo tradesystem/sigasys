@@ -1,10 +1,16 @@
 import React, {useState, useEffect} from 'react'
-import {View, Text} from 'react-native'
+import {View, Text, SafeAreaView, StyleSheet} from 'react-native'
 import moment from 'moment'
 
 import firestore from '@react-native-firebase/firestore'
-import {GiftedChat, Bubble} from 'react-native-gifted-chat'
+import {GiftedChat, Bubble, InputToolbar} from 'react-native-gifted-chat'
 
+const styles = StyleSheet.create({
+    container: {
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end'
+    }
+})
 function ChatOnline(props){
     const [user, setUser] = useState(props.route.params.userChat)
     const [messages, setMessages] = useState([])
@@ -33,8 +39,8 @@ function ChatOnline(props){
 
     function renderBubble(props){
         return (
-            <View>
-                <Text style={{left: 90, top: 320}}>{props.currentMessage.user.name}</Text>
+            <View style={styles.container}>
+                <Text style={{left: 25, fontSize: 16, textAlign: 'justify'}}>{props.currentMessage.user.name}</Text>
                 <Bubble
                     {...props}
                 />
@@ -47,6 +53,7 @@ function ChatOnline(props){
             dateFormat={'YYYY'}
             timeFormat={'mm'}
             renderBubble={renderBubble}
+            renderInputToolbar={() => <InputToolbar />}
             messages={messages}
             onSend={messages => onSend(messages)}
             user={{
@@ -55,10 +62,6 @@ function ChatOnline(props){
             }}
         />
     )
-}
-
-ChatOnline.navigationOptions = {
-    title: 'Chat',
 }
 
 export default ChatOnline
