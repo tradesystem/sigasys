@@ -6,7 +6,7 @@ import firestore from '@react-native-firebase/firestore'
 import {GiftedChat, Bubble} from 'react-native-gifted-chat'
 
 function ChatOnline(props){
-    const [user, setUser] = useState([{firstName: 'Usuario', lastname: 'Teste'}])
+    const [user, setUser] = useState(props.route.params.userChat)
     const [messages, setMessages] = useState([])
     useEffect(() => {
         console.log(user)
@@ -34,7 +34,7 @@ function ChatOnline(props){
     function renderBubble(props){
         return (
             <View>
-                <Text style={{left: 90, top: 120}}>{props.currentMessage.user.name}</Text>
+                <Text style={{left: 90, top: 320}}>{props.currentMessage.user.name}</Text>
                 <Bubble
                     {...props}
                 />
@@ -50,8 +50,8 @@ function ChatOnline(props){
             messages={messages}
             onSend={messages => onSend(messages)}
             user={{
-                id: user.id,
-                name: user.firstName,
+                id: user,
+                name: user,
             }}
         />
     )

@@ -17,20 +17,35 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: commonstyles.colors.sigasyscinza,
     },
+    containerHeader: {
+        flex: 2,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    containerCentral: {
+        flex: 6,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    containerRodape: {
+        flex: 2,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     logo: {
-        width: 100,
-        height: 100,
-        marginTop: 50
+        width: 90,
+        height: 90,
+        marginTop: 2
     },
     logosiga: {
-        width: 120,
+        width: 100,
         resizeMode: 'center'
     },
     titulo: {
         fontSize: 24
     },
     input: {
-        width: '90%',
+        width: 300,
         borderWidth: 1,        
         borderRadius: 5,
         borderColor: 'black',
@@ -38,8 +53,8 @@ const styles = StyleSheet.create({
         marginVertical: 8
     },
     botaoEntrar: {
-        width: '90%',
-        padding: 5,
+        width: 300,
+        paddingVertical: 10,
         borderColor: 'black',
         borderWidth: 1,
         borderRadius: 10,
@@ -90,26 +105,42 @@ class Inicio extends Component {
         return (
 
             <View style={styles.container}>
-                    <Image source={logo} style={styles.logo} />
-                    {user &&
-                        <Text style={{color: 'white'}}>Bem vindo, {user.email}</Text>
-                    }
-                    <TouchableOpacity style={styles.input} onPress={() => this.props.navigation.navigate("Chamar")}>
-                        <Text style={{textAlign: 'center', color: 'white'}}>Acionar Emergência</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.input}>
-                        <Text style={{textAlign: 'center', color: 'white'}}>Simular Emergência</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.input} onPress={() => this.props.navigation.navigate("ChatOnline")}>
-                        <Text style={{textAlign: 'center', color: 'white'}}>Entrar no Chat</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.botaoEntrar} onPress={() => this.logout()}>
-                        <Text style={{textAlign: 'center', color: 'white'}}>Sair</Text>
-                    </TouchableOpacity>
-                    {this.state.loading &&
-                        this.renderLoading()
-                    }        
-                    <Image source={logosiga} style={styles.logosiga} />                    
+                    <View style={styles.containerHeader}>
+                        <Image source={logo} style={styles.logo} />
+                        {user &&
+                            <Text style={{color: 'white'}}>Bem vindo, {user.email}</Text>
+                        }
+                    </View>
+                    <View style={styles.containerCentral}>
+                        <TouchableOpacity style={styles.input} onPress={() => this.props.navigation.navigate("Chamar")}>
+                            <Text style={{textAlign: 'center', color: 'white'}}>Acionar Emergência</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.input}>
+                            <Text style={{textAlign: 'center', color: 'white'}}>Simular Emergência</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            style={styles.input} 
+                            onPress={
+                                () => this.props.navigation.navigate("ChatOnline", {
+                                    userChat: user.email
+                                }
+                            )}
+                        >
+                            <Text style={{textAlign: 'center', color: 'white'}}>Entrar no Chat</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.botaoEntrar} onPress={() => this.props.navigation.navigate('Localizacao')}>
+                            <Text style={{textAlign: 'center', color: 'white'}}>Mapa</Text>    
+                        </TouchableOpacity> 
+                        <TouchableOpacity style={styles.botaoEntrar} onPress={() => this.logout()}>
+                            <Text style={{textAlign: 'center', color: 'white'}}>Sair</Text>
+                        </TouchableOpacity>
+                        {this.state.loading &&
+                            this.renderLoading()
+                        }
+                    </View> 
+                    <View style={styles.containerRodape}>     
+                        <Image source={logosiga} style={styles.logosiga} />
+                    </View>                   
             </View>
         )
     }

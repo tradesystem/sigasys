@@ -8,7 +8,9 @@ import {View,
         KeyboardAvoidingView,
         SafeAreaView, 
         Alert,
-        PermissionsAndroid} 
+        PermissionsAndroid,
+        Animated
+    } 
     from 'react-native'
 
 import commonstyles from '../commonstyles'
@@ -29,18 +31,29 @@ const styles = StyleSheet.create({
     },
     container: {
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flex: 1
     },
+    containerLogo: {
+        flex: 3
+    },
+    containerCentral: {
+        flex: 4
+    },
+    containerRodape: {
+        flex: 4,
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start'
+    },  
     logo: {
         width: 90,
         height: 90,
-        marginTop: 60,
-        marginBottom: 20
+        marginTop: 5,
+        marginBottom: 2
     },
     logosiga: {
-        width: 120,
+        width: 100,
         resizeMode: 'center',
-        marginBottom: 45
     },
     titulo: {
         fontSize: 24
@@ -165,24 +178,25 @@ class Auth extends Component {
         return (
             <KeyboardAvoidingView style={styles.containerKeyboard}>
                 <SafeAreaView style={styles.container}>
-                    <Image source={logo} style={styles.logo} />
+                    <View style={styles.containerLogo}>
+                        <Image source={logo} style={styles.logo} />
+                    </View>
                     {!user &&
                         <Text style={{color: 'white'}}>Faça login</Text>
-                    }      
-                    <Text>Latitude: {this.state.userPosition ? this.state.userPosition.latitude : ''}</Text>          
-                    <Text>Longitude: {this.state.userPosition ? this.state.userPosition.longitude : ''}</Text>  
-                    <TextInput style={styles.input} value={this.state.login} placeholder='E-mail' onChangeText={(val) => this.setState({login: val})} />
-                    <TextInput secureTextEntry style={styles.input} value={this.state.senha} placeholder='senha' onChangeText={(val) => this.setState({senha: val})} />
-                    <TouchableOpacity disabled={!validForm} style={validForm ? styles.botaoEntrar : styles.botaoDesabilitado} onPress={() => this.handleLogin()}>
-                        <Text style={{textAlign: 'center', color: 'white'}}>Entrar</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.botaoEntrar} onPress={() => this.props.navigation.navigate('Cadastro')}>
-                        <Text style={{textAlign: 'center', color: 'white'}}>Solicitar Acesso ao Sistema</Text>    
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.botaoEntrar} onPress={() => this.props.navigation.navigate('Localizacao')}>
-                        <Text style={{textAlign: 'center', color: 'white'}}>Mapa</Text>    
-                    </TouchableOpacity>                       
-                    <Image source={logosiga} style={styles.logosiga} />
+                    }
+                    <View style={styles.containerCentral}>      
+                        <TextInput style={styles.input} value={this.state.login} placeholder='E-mail' onChangeText={(val) => this.setState({login: val})} />
+                        <TextInput secureTextEntry style={styles.input} value={this.state.senha} placeholder='senha' onChangeText={(val) => this.setState({senha: val})} />
+                        <TouchableOpacity disabled={!validForm} style={validForm ? styles.botaoEntrar : styles.botaoDesabilitado} onPress={() => this.handleLogin()}>
+                            <Text style={{textAlign: 'center', color: 'white'}}>Entrar</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.botaoEntrar} onPress={() => this.props.navigation.navigate('Cadastro')}>
+                            <Text style={{textAlign: 'center', color: 'white'}}>Solicitar Acesso ao Sistema</Text>    
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.containerRodape}>                    
+                        <Image source={logosiga} style={styles.logosiga} />
+                    </View>  
                 </SafeAreaView>
             </KeyboardAvoidingView>
         )
@@ -192,4 +206,7 @@ class Auth extends Component {
 export default Auth
 
 /*
-<FontAwesomeIcon icon={faDoorOpen} size={20} color='white' />*/
+<FontAwesomeIcon icon={faDoorOpen} size={20} color='white' />
+<Text>Latitude: {this.state.userPosition ? this.state.userPosition.latitude : ''}</Text>          
+                        <Text>Longitude: {this.state.userPosition ? this.state.userPosition.longitude : ''}</Text>  
+*/
