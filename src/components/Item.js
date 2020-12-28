@@ -45,11 +45,20 @@ class Item extends Component {
         this.setState({checked: !this.state.checked})
     }
 
+    componentDidMount(){
+        if(this.props.marcado){
+            this.setState({checked: true})
+        }
+    }
+
     render(){
         
         return (
             <TouchableOpacity onPress={() => this.alteraValor()} style={styles.container}>
                 <Text style={styles.nome}>{this.props.nome}</Text>
+                {this.props.empresa &&
+                    <Text style={styles.nome}>{this.props.empresa}</Text>
+                }
                 <Check 
                     width={28} 
                     height={28} 

@@ -19,7 +19,7 @@ function Navigator(){
     return (
         <NavigationContainer>
             <Stack.Navigator 
-                initialRouteName="Inicio" 
+                initialRouteName="Login" 
                 headerMode='screen'
             >
                 <Stack.Screen name="Login" component={Auth} options={{

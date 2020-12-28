@@ -90,7 +90,7 @@ class Apoio extends Component {
         empresas: [],
         equipamentos: [],
         pam: false,
-        pei: false
+        paporg: false
     }
 
     componentDidMount = async () => {
@@ -106,8 +106,8 @@ class Apoio extends Component {
         if(this.props.route.params.pam){
             await this.setState({pam: this.props.route.params.pam})
         }
-        if(this.props.route.params.pei){
-            await this.setState({pei: this.props.route.params.pei})
+        if(this.props.route.params.paporg){
+            await this.setState({paporg: this.props.route.params.paporg})
         }
         //Alert.alert(this.state.equipamentos[0])
     }
@@ -176,13 +176,13 @@ class Apoio extends Component {
                     <View>
                         <Text>Tipo de Emergência</Text>
                         <View style={styles.tiposEmergencia}>
-                                <CheckBox checked={this.state.pam} onPress={() => this.setState({pam: !this.state.pam})} style={{borderColor: 'white'}}/>
+                                <CheckBox checked={this.state.pam} onPress={() => this.setState({pam: this.state.pam})} style={{borderColor: 'white'}}/>
                                 <Body>
                                     <Text>PAM</Text>
                                 </Body>
-                                <CheckBox checked={this.state.pei} onPress={() => this.setState({pei: !this.state.pei})} style={{borderColor: 'white'}}/>
+                                <CheckBox checked={this.state.paporg} onPress={() => this.setState({paporg: this.state.paporg})} style={{borderColor: 'white'}}/>
                                 <Body>
-                                    <Text>PEI</Text>
+                                    <Text>PAPORG</Text>
                                 </Body>
                         </View>
                     </View>

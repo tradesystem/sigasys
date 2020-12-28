@@ -13,6 +13,7 @@ import {View,
     } 
     from 'react-native'
 
+import api from '../services/api'
 import commonstyles from '../commonstyles'
 import logo from '../assets/logo.png'
 import logosiga from '../assets/logosiga.png'
@@ -94,7 +95,8 @@ class Auth extends Component {
         login: 'teste@sigarg.com.br',
         senha: 'teste123',
         userPosition: null,
-        hasLocationPermission: false
+        hasLocationPermission: false,
+        uid: ''
     }
 
     verifyLocationPermission = async () => {
@@ -103,7 +105,7 @@ class Auth extends Component {
                 PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
             )
             if(granted === PermissionsAndroid.RESULTS.GRANTED){
-                console.log('permissão concedida')
+                //console.log('permissão concedida')
                 await this.setState({hasLocationPermission: true})
             }else{
                 console.error('permissão negada')
@@ -137,9 +139,15 @@ class Auth extends Component {
         //Alert.alert("aqui", 'entrou aqui')
         await auth()
         .signInWithEmailAndPassword(this.state.login, this.state.senha)
-        .then(() => {
-            Alert.alert('Sucesso', 'Login realizado!')
-            this.props.navigation.navigate('Inicio')
+        .then(async () => {
+            let data = new FormData()
+            data.append("login", this.state.login)
+            data.append("uid", this.state.uid)
+            await api.post('wsapp/ws_login.php', data, {
+            }).then(
+                async res => await this.props.navigation.navigate('Inicio')
+            )
+            //Alert.alert('Sucesso', 'Login realizado!')
         })
         .catch(error => Alert.alert('Erro', error.message)) 
     }
@@ -151,16 +159,16 @@ class Auth extends Component {
         OneSignal.addEventListener('ids', this.idsPush)
         await this.verifyLocationPermission()
         await this.pegaPosicaoAtual()
-        console.log(moment().format('YYYY_MM_DD_hh_mm_ss'))
+        //console.log(moment().format('YYYY_MM_DD_hh_mm_ss'))
     }
 
     receivedPush(push){
-        console.log(`Received Push: ${push}`)
+        //console.log(`Received Push: ${push}`)
     }
 
     openedPush = async (push) => {
         //console.log(`Opened Push: ${JSON.stringify(push)}`)
-        console.log(push.notification.payload.additionalData.colecao)
+        //console.log(push.notification.payload.additionalData.colecao)
         this.props.navigation.navigate("ChatOnline", {
             userChat: 'Dev Tradesystem',
             colecao: push.notification.payload.additionalData.colecao
@@ -172,8 +180,10 @@ class Auth extends Component {
         */
     }
 
-    idsPush(push){
-        console.log(`IDS Push: ${push}`)
+    idsPush = async (push) => {
+        //console.log(`IDS Push: ${JSON.stringify(push)}`)
+        await this.setState({uid: push.userId})
+        //console.log(this.state.uid)
     }
 
     horaAtual = () => {
