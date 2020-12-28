@@ -52,7 +52,7 @@ class Localizacao extends Component {
             Geolocation.getCurrentPosition(
                 async position => {
                     await this.setState({latitude: position.coords.latitude, longitude: position.coords.longitude})
-                    console.log(position.coords.latitude)
+                    console.log(position.coords.longitude)
                 },
                 error => {
                     console.log(error.code, error.message)
@@ -73,20 +73,21 @@ class Localizacao extends Component {
      
     render(){
         
-        //let latitude = this.state.userPosition ? this.state.userPosition.latitude : -95.099215
-        //let longitude = this.state.userPosition ? this.state.userPosition.longitude : 29.583299
-        let latitude = -32.03737156760161
-        let longitude = -52.10169498277187
+        //let latitude = this.state.latitude ? this.state.latitude : 0
+        //let longitude = this.state.longitude ? this.state.longitude : 0
+        //let latitude = -32.033594
+        //let longitude = -52.093164
+
         return (
                 <MapBoxGL.MapView style={styles.mapa} styleURL={MapBoxGL.StyleURL.Street}>
                     <MapBoxGL.Camera
-                        //centerCoordinate={this._ma}
-                        centerCoordinate={[latitude, longitude]}
-                        zoomLevel={1}
+                        animationMode="flyTo"
+                        centerCoordinate={[this.state.longitude, this.state.latitude]}
+                        zoomLevel={15}
                     />
                     <MapBoxGL.PointAnnotation
                         id="primeira-anotacao"
-                        coordinate={[latitude, longitude]}
+                        coordinate={[this.state.longitude, this.state.latitude]}
                     />
                 </MapBoxGL.MapView>
         )

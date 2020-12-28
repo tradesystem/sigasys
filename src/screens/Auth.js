@@ -18,6 +18,7 @@ import logo from '../assets/logo.png'
 import logosiga from '../assets/logosiga.png'
 import auth from '@react-native-firebase/auth'
 import OneSignal from 'react-native-onesignal'
+import moment from 'moment'
 
 import Geolocation from 'react-native-geolocation-service'
 
@@ -150,18 +151,33 @@ class Auth extends Component {
         OneSignal.addEventListener('ids', this.idsPush)
         await this.verifyLocationPermission()
         await this.pegaPosicaoAtual()
+        console.log(moment().format('YYYY_MM_DD_hh_mm_ss'))
     }
 
     receivedPush(push){
         console.log(`Received Push: ${push}`)
     }
 
-    openedPush(push){
-        console.log(`Opened Push: ${push}`)
+    openedPush = async (push) => {
+        //console.log(`Opened Push: ${JSON.stringify(push)}`)
+        console.log(push.notification.payload.additionalData.colecao)
+        this.props.navigation.navigate("ChatOnline", {
+            userChat: 'Dev Tradesystem',
+            colecao: push.notification.payload.additionalData.colecao
+        })
+        /*
+        navigation.navigate("ChatOnline", {
+            userChat: 'Dev Tradesystem', 
+        })
+        */
     }
 
     idsPush(push){
         console.log(`IDS Push: ${push}`)
+    }
+
+    horaAtual = () => {
+        console.log('Teste')
     }
 
     render(){

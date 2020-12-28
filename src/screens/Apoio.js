@@ -4,6 +4,7 @@ import {CheckBox, ListItem, Body} from 'native-base'
 
 import commonstyles from '../commonstyles'
 import api from '../services/api'
+import moment from 'moment'
 
 import logo from '../assets/logo.png'
 import logosiga from '../assets/logosiga.png'
@@ -131,14 +132,23 @@ class Apoio extends Component {
         let equipamentos = JSON.stringify(this.state.equipamentos)
         let empresas = JSON.stringify(this.state.empresas)
         let apoios = JSON.stringify(this.state.apoiosSelecionados)
+        let datahora = await moment().format('YYYY_MM_DD_hh_mm_ss').toString()
+        let colecao = `chat_${datahora}`
         //console.log(equipamentos)
         let data = new FormData()
         data.append("equipamentos", equipamentos)
         data.append("empresas", empresas)
         data.append("apoios", apoios)
+        data.append("colecao", colecao)
         await api.post('wsapp/notificacao.php', data, {
         }).then(
-            async res => await Alert.alert("Chamado Aberto!"),
+            async res => {
+                Alert.alert("chamado aberto!")
+                await this.props.navigation.navigate('ChatOnline', {
+                    userChat: 'Chamado',
+                    colecao: colecao
+                })
+            },
             async res => await Alert.alert('Erro', 'Tente novamente!')
         )
         //Alert.alert("Chamado Aberto!")
